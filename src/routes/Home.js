@@ -3,6 +3,22 @@ import { useQuery } from "react-query";
 import { fetchDiscussions } from "../api/api";
 import Discussions from "../components/Discussions";
 import Pagination from "../components/Pagination";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Header = styled.div`
+  margin: 1em 0;
+`;
+
+const Title = styled.h1`
+  font-size: 4em;
+`;
 
 function Home() {
   const { isLoading, data } = useQuery(["discussions"], fetchDiscussions); // discussions 데이터 가져오기
@@ -17,7 +33,10 @@ function Home() {
   };
 
   return (
-    <div>
+    <Container>
+      <Header>
+        <Title>Agorastates</Title>
+      </Header>
       {data ? (
         <>
           <Discussions isLoading={isLoading} discussions={currentPosts(data)} />
@@ -28,7 +47,7 @@ function Home() {
           ></Pagination>
         </>
       ) : null}
-    </div>
+    </Container>
   );
 }
 

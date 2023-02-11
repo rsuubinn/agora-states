@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
 `;
 
 const Img = styled.img`
