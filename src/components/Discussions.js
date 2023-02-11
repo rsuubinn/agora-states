@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Discussion from "./Discussion";
 
-const DiscussionsList = styled.div``;
+const DiscussionsList = styled.div`
+  margin-top: 5em;
+`;
 
 function Discussions({ isLoading, discussions }) {
   return (

@@ -4,20 +4,11 @@ import { fetchDiscussions } from "../api/api";
 import Discussions from "../components/Discussions";
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
+import Header from "../components/Header";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Header = styled.div`
-  margin: 1em 0;
-`;
-
-const Title = styled.h1`
-  font-size: 4em;
+  width: 100%;
+  height: 100vh;
 `;
 
 function Home() {
@@ -34,9 +25,7 @@ function Home() {
 
   return (
     <Container>
-      <Header>
-        <Title>Agorastates</Title>
-      </Header>
+      <Header />
       {data ? (
         <>
           <Discussions isLoading={isLoading} discussions={currentPosts(data)} />

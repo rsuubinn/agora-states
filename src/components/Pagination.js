@@ -5,6 +5,7 @@ const PageUl = styled.ul`
   position: fixed;
   left: 50%;
   bottom: 10%;
+  transform: translate(-50%);
 `;
 
 const PageLi = styled.li`
