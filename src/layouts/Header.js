@@ -17,7 +17,8 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   height: 50%;
-  margin: 0 1em;
+  margin-left: 3em;
+  margin-right: 1.5em;
 `;
 
 const Span = styled.span`

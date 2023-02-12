@@ -4,14 +4,14 @@ const PageUl = styled.ul`
   display: flex;
   position: fixed;
   left: 50%;
-  bottom: 10%;
+  bottom: 5%;
   transform: translate(-50%);
 `;
 
 const PageLi = styled.li`
   margin-right: 10px;
   &:hover {
-    color: red;
+    color: #8369e2;
   }
 `;
 
