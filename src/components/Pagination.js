@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 const PageUl = styled.ul`
   display: flex;
-  position: fixed;
-  left: 50%;
-  bottom: 5%;
-  transform: translate(-50%);
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
 `;
 
 const PageLi = styled.li`

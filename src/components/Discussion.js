@@ -1,12 +1,17 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { formatCreatedAt } from "../utils/formatCreatedAt";
+import DiscussionDetail from "./DiscussionDetail";
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   background-color: white;
   cursor: pointer;
   padding: 1em 2em;
   border-radius: 15px;
+  width: 60%;
 `;
 
 const Img = styled.img`
@@ -59,32 +64,61 @@ const AnswerNo = styled.div`
   }
 `;
 
-const Toggle = styled.span``;
+const containerVariants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.1,
+    transition: {
+      duration: 0.3,
+      delay: 0.2,
+      type: "tween",
+    },
+  },
+};
 
 function Discussion({ discussion }) {
-  const createdAt = new Date(discussion.createdAt);
-  const createdAtDate = createdAt.toLocaleDateString("ko-KR");
-  const createdAtTime = createdAt.toLocaleTimeString("ko-KR");
+  const navigate = useNavigate();
+  const discussionMatch = useMatch("/discussion/:discussionId");
+  const onDiscussionClick = (discussionId) => {
+    navigate(`/discussion/${discussionId}`);
+  };
   return (
-    <Container>
-      <Img src={discussion.avatarUrl} />
-      <Title>{discussion.title}</Title>
-      <Div>
-        <Author>{discussion.author}</Author>|
-        <CreatedAt>
-          {createdAtDate} {createdAtTime}
-        </CreatedAt>
-      </Div>
-      {discussion.answer ? (
-        <AnswerOk>
-          <Toggle className="toggle">●</Toggle> 답변 완료
-        </AnswerOk>
-      ) : (
-        <AnswerNo>
-          <Toggle>●</Toggle> 답변 대기
-        </AnswerNo>
-      )}
-    </Container>
+    <>
+      <Container
+        variants={containerVariants}
+        initial="normal"
+        whileHover="hover"
+        transition={{ type: "tween" }}
+        onClick={() => {
+          onDiscussionClick(discussion.id);
+        }}
+      >
+        <Img src={discussion.avatarUrl} />
+        <Title>{discussion.title}</Title>
+        <Div>
+          <Author>{discussion.author}</Author>|
+          <CreatedAt>{formatCreatedAt(discussion.createdAt)}</CreatedAt>
+        </Div>
+        {discussion.answer ? (
+          <AnswerOk>
+            <span className="toggle">●</span> 답변 완료
+          </AnswerOk>
+        ) : (
+          <AnswerNo>
+            <span>●</span> 답변 대기
+          </AnswerNo>
+        )}
+      </Container>
+      <AnimatePresence>
+        {discussionMatch ? (
+          <DiscussionDetail
+            discussionId={discussionMatch.params.discussionId}
+          />
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 }
 
