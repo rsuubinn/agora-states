@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -9,7 +10,7 @@ const Container = styled.div`
   width: 100%;
   height: 4em;
   background-color: white;
-  border-bottom: 1px solid #b2b2b2;
+  box-shadow: 0 4px 42px 0px rgb(0 0 0 / 15%);
   & > div {
     display: flex;
     align-items: center;
@@ -35,14 +36,47 @@ const Button = styled.button`
   border-radius: 10px;
 `;
 
+const Overlay = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+`;
+
+const Form = styled.div`
+  background-color: white;
+  width: 60vw;
+  height: 80vh;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+`;
+
 function Header() {
+  const [isClicked, setIsClicked] = useState(false);
+  const makeDiscussion = () => {
+    setIsClicked(true);
+  };
+
+  const onGoBack = () => {
+    setIsClicked(false);
+  };
+
   return (
     <Container>
       <div>
         <Logo src="https://www.codestates.com/_next/image?url=%2Fassets%2Fcommon%2Flogo%2Fcodestates-ci.png&w=128&q=75" />
         <Span>아고라스테이츠</Span>
       </div>
-      <Button>질문하기</Button>
+      <Button onClick={makeDiscussion}>질문하기</Button>
+      {isClicked ? (
+        <>
+          <Overlay onClick={onGoBack} />
+          <Form></Form>
+        </>
+      ) : null}
     </Container>
   );
 }
